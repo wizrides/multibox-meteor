@@ -1,0 +1,240 @@
+input[type="button"] {
+	margin-bottom: 10px;
+	background-color: #FFFFFF;
+	border: 1px solid #CCCCCC;
+}
+
+input[type="button"]:hover {
+	cursor: pointer;
+	background-color: #EEEEEE;
+}
+
+input[type="button"].multibox-control-button {
+	border: none;
+	background-color: #FFFFFF;
+	color: #5B8CD7;
+}
+
+input[type="button"].multibox-control-button:hover {
+	border: none;
+	background-color: #ADC6EB;
+}
+
+input[type="button"].multibox-control-button.multibox-control-button-selected {
+	border: none;
+	background-color: #FFFFFF;
+	background-color: #ADC6EB;
+}
+
+a {
+	color: #5B8CD7;
+	font-size: 14px;
+}
+
+a:hover {
+	color: #CCC;
+	cursor: pointer;
+}
+
+a.current-selection {
+	border-bottom: 2px solid #FF5C33;
+}
+
+div.small-margin-top {
+	margin-top: 5px;
+}
+
+.container {
+	padding: 10px;
+}
+
+.container .container-top {
+	width: 100%;
+	top: 0;
+	bottom: 90%;
+}
+
+.container .container-bottom {
+	position: absolute;
+	top: 220px;
+	bottom: 10px;
+	left: 10px;
+	right: 10px;
+}
+
+.container .container-middle {
+	position: absolute;
+	top: 180px;
+	bottom: 10px;
+	left: 10px;
+	right: 10px;
+}
+
+.container .container-bottom-left {
+	right: 50%;
+}
+
+.container .container-bottom-right {
+	left: 50%;
+}
+
+.multibox-container {
+ 	width: 100%;
+	height: 100%;
+	min-height: 100%;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	left: 0;
+}
+
+/*
+* Multibox controls
+*/
+
+.multibox .multibox-control-panel {
+	overflow-x: auto;
+	overflow-y: hidden;
+	width: 100%;
+	height: 30px;
+	border: 1px solid #CCCCCC;
+	position: absolute;
+
+	top: 0;
+	bottom: 0;
+	left: -1px;
+}
+
+.multibox-control {
+	width: 50px;
+	display: inline-block;
+
+	padding: 10px 4px;
+}
+
+.multibox-controls {
+	width: 100%;
+	border: 1px solid transparent;	
+}
+
+.multibox-control-selected {
+	border-bottom: 2px solid #FF5C33;
+}
+
+.multibox-option-control-button-container {
+}
+
+.multibox-control-button {
+}
+
+/*
+* Mutibox implementation
+*/
+
+.multibox {
+	overflow: auto;
+	width: 100%;
+	border: 1px solid #CCCCCC;
+	position: absolute;
+
+	top: 0;
+	bottom: 0;
+	left: -1px;
+}
+
+.multibox-option {
+	padding: 6px;
+}
+
+.multibox-option-drag {
+	border: 1px solid #CCCCCC;
+}
+
+.multibox-option .multibox-option-check-container {
+	float: left;
+	display: inline-block;
+}
+
+.multibox-option .multibox-option-label-container {
+	display: inline-block;
+	width: 60%;
+}
+
+.multibox-option .multibox-option-badge-container {
+	display: inline-block;
+}
+
+.multibox-option.border-bottom {
+	border-bottom: 1px solid #CCCCCC;
+}
+
+.multibox-option-main-label {
+	width: 100%;
+	display: block;
+}
+
+.multibox-option-sub-label {
+	color: #777777;
+	font-size: 12px;
+}
+
+.float-right {
+	float: right;
+}
+
+.multibox-option-badge {
+	display: inline-block;
+    min-width: 10px;
+    padding: 3px 7px;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1;
+    color: #18283c;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    background-color: #CCCCCC;
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+}
+
+.multibox-option-badge:hover {
+    background-color: #BBBBBB;
+    color: #008ee2;
+}
+
+.multibox-option-badge:active {
+    background-color: #999999;
+}
+
+/*
+* Multibox classes
+*/
+
+.multibox {
+}
+
+	.multibox div {
+	}
+
+	.multibox .multibox-option.ui-selectee:hover {
+		background-color: #EEEEEE;
+	}
+
+	.multibox .multibox-option.ui-selectee.ui-selecting {
+		background-color: #82B1FF;
+	}
+
+	.multibox .multibox-option.ui-selectee.ui-selected {
+		background-color: #448AFF;
+	}
+
+	.multibox .multibox-option.ui-selectee.ui-selected:hover {
+		background-color: #3D7CE6;
+	}
+
+	.multibox .multibox-option.ui-selectee.ui-unselecting {
+		background-color: #FFFFFF;
+	}
