@@ -552,6 +552,8 @@ $.widget("ui.multibox", $.ui.mouse, {
 	},
 
 	selectionChanged: function (event) {
+		var that = this;
+
 		// Handle checkbox display
         var options = this.getOptions();
         for (var i = 0; i < options.length; i++) {
@@ -572,12 +574,14 @@ $.widget("ui.multibox", $.ui.mouse, {
         // Handle display filter setting
         if (this.options.displayFilter === 'selected') {
             this.getOptions().each(function () {
-                if (!$(this).hasClass('ui-selected')) {
-                    $(this).slideUp('fast');
-                }
-                else {
-                    $(this).slideDown('fast');
-                }
+            	//if (that.selectionMode !=== "single") {
+	                if (!$(this).hasClass('ui-selected')) {
+	                    $(this).slideUp('fast');
+	                }
+	                else {
+	                    $(this).slideDown('fast');
+	                }
+            	//}
             });
         }
 
