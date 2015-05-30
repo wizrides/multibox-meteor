@@ -413,6 +413,10 @@ $.widget("ui.multibox", $.ui.mouse, {
 			return;
 		}
 
+		if (this._checkCancelHover(event)) {
+			$(event.target).closest("div.multibox-option").removeClass("ui-selected");
+		}
+
 		console.log("stop x: " + event.pageX + " stop y: " + event.pageY);
 
 		console.log("delta x: " + (event.pageX - this.opos[0]) + " delta y: " + (event.pageY - this.opos[1]));
@@ -490,6 +494,19 @@ $.widget("ui.multibox", $.ui.mouse, {
 		});
 	},
 
+	_checkCancelHover: function (event) {
+		if ((event === null) || (event === undefined) || (event.target === null) || (event.target === undefined)) {
+			return false;
+		}
+
+		if ($(event.target).hasClass("material-icons") 
+			&& $(event.target).innerHTML === "cancel") {
+			return true;
+		}
+
+		return false;
+	},
+
 	_checkBadgeClicked: function (event) {
 		if ((event === null) || (event === undefined) || (event.target === null) || (event.target === undefined)) {
 			return false;
@@ -559,14 +576,14 @@ $.widget("ui.multibox", $.ui.mouse, {
         for (var i = 0; i < options.length; i++) {
             if ($(options[i]).hasClass('ui-selected')) {
                 $(options[i]).find('div.multibox-option-check-container').each(function () {
-                    $(this).find('input[type="checkbox"]').prop('checked', true);
+                    //$(this).find('input[type="checkbox"]').prop('checked', true);
                     $(this).css('display', 'inline-block');
                 });
             }
             else {
                 $(options[i]).find('div.multibox-option-check-container').each(function () {
-                    $(this).hide();
-                    $(this).find('input[type="checkbox"]').prop('checked', false);
+                    $(this).css("display", "none");
+                    //$(this).find('input[type="checkbox"]').prop('checked', false);
                 });
             }
         }
@@ -655,7 +672,7 @@ $.widget("ui.multibox", $.ui.mouse, {
 	showSelected: function () {
         this.options.displayFilter = 'selected';
 
-		this.element.find('div.multibox-option').hide();
+		this.element.find('div.multibox-option').css("display", "none");
 		this.element.find('div.multibox-option.ui-selected').slideDown('fast');
 	},
 
@@ -811,7 +828,7 @@ $.widget("ui.multibox", $.ui.mouse, {
 								   	.data('group', multiboxOption.groups)
 								   	.append(this.buildMultiboxCheck())
 								   	.append(this.buildMultiboxLabel(multiboxLabel))
-								   	.append(this.buildMultiboxBadge(multiboxOption.badgeLabel))
+								   	.append(this.buildMultiboxBadge(multiboxOption.badgeLabel, multiboxOption.badgeAction, multiboxOption.badgeActionParams))
 								   	.resize(function (event) {
 						    			var oCheck = $(this).find('div.multibox-option-check-container');
 										$.fn.centerVertically(this, oCheck, 'margin', '10', '0');
@@ -830,7 +847,7 @@ $.widget("ui.multibox", $.ui.mouse, {
 								   	.resize(function (event) {
 						    			var oBadge = $(this).find('div.multibox-option-badge-container');
 										$.fn.centerVertically(this, oBadge, 'margin', '5', '0');
-								   	});
+								   	});_checkCancelHover
 		    }
 		}
 		else {
@@ -860,22 +877,20 @@ $.widget("ui.multibox", $.ui.mouse, {
 		// Save multibox reference 'this' so we can access within click event
         var that = this;
 		return $('<div>').addClass('multibox-option-check-container')
-							.hide()
-							.append($('<input>').attr('type', 'checkbox')
-												.attr('checked', 'checked')
-												.bind('click', function () {
-	                                                if ($(this).prop('checked') === true) {
-	                                                    $(this).parent('div.multibox-option-check-container')
-	                                                            .parent('div.multibox-option').addClass('ui-selected');
-	                                                }
-	                                                else {
-	                                                    $(this).parent('div.multibox-option-check-container')
-	                                                            .parent('div.multibox-option').removeClass('ui-selected');
-	                                                }
-
-	                                                // that = multibox
-                                                    that.selectionChanged();
-	                                            }));
+							.css("display", "none")
+							.append($("<i>").addClass("material-icons dp32x24 green")
+											.html("check_circle")
+											.bind('click', function () {
+		                                    })
+		                                    .hover(function () {
+	                                            $(this).html("cancel")
+	                                            		.removeClass("green")
+	                                            		.addClass("red");
+		                                    }, function () {
+	                                            $(this).html("check_circle")
+	                                            		.removeClass("red")
+	                                            		.addClass("green");
+		                                    }));
 	},
 
 	buildMultiboxLabel: function (multiboxLabel) {
@@ -886,14 +901,17 @@ $.widget("ui.multibox", $.ui.mouse, {
 											   	.text(multiboxLabel.subLabel));
    	},
 
-   	buildMultiboxBadge: function (badgeLabel) {
+   	buildMultiboxBadge: function (badgeLabel, badgeAction, badgeActionParams) {
    		return $('<div>').addClass('multibox-option-badge-container float-right')
 			   			.append($('<span>').addClass('multibox-option-badge')
 								  	     	.html(badgeLabel)
 								  		 	.data('badgeLabel', badgeLabel)
 										  	.bind('click', function (event) {
-										  		alert('clicked ' + $(this).data('badgeLabel') + '!');
-										  		event.preventDefault();
+										  		if ((badgeAction === null) || (badgeAction === undefined)) {
+										  			return;
+										  		}
+
+										  		badgeAction.apply(this, badgeActionParams);
 										  	})
 										  	.hover(function (event) {
 								  		 	}, function (event) {
@@ -912,7 +930,7 @@ $.widget("ui.multibox", $.ui.mouse, {
             return;
         }
 
-        this.element.find('div.multibox-option').hide();
+        this.element.find('div.multibox-option').css("display", "none");
         var token = token.trim().toLowerCase();
 
         // Blank search token
@@ -944,7 +962,7 @@ $.widget("ui.multibox", $.ui.mouse, {
 		this.centerVerticallyChecks();
 		this.getOptions().each(function () {
 			if (!$(this).hasClass('ui-selected')) {
-	            $(this).find('div.multibox-option-check-container').hide();
+	            $(this).find('div.multibox-option-check-container').css("display", "none");
 	        }
 		});
 	},
@@ -952,8 +970,13 @@ $.widget("ui.multibox", $.ui.mouse, {
 	centerVerticallyChecks: function () {
 		this.getOptions().each(function () {
 			var oCheck = $(this).find('div.multibox-option-check-container');
+			var oIcon = oCheck.find("i.material");
+
+			// Make it visible so that it can center properly
+			oCheck.css("display", "inline-block");
 
 			$.fn.centerVertically(this, oCheck, 'margin', '10', '0');
+			$.fn.centerVertically(oCheck, oIcon, "margin", "0", "0");
 		});
 	},
 

@@ -34,6 +34,10 @@ function getDisplaySelection() {
   return 'all';
 }
 
+function showAlert(message) {
+  alert(message);
+}
+
 function rebuild(multiboxSelector) {
   $(multiboxSelector).multibox('clearOptions');
 
@@ -53,7 +57,9 @@ function rebuild(multiboxSelector) {
       subLabel: subOptionLabel,
       showBadge: true,
       badgeLabel: i + 1,
-      showCheck: true
+      showCheck: true,
+      badgeAction: showAlert,
+      badgeActionParams: [i + 1]
     };
 
     var multiboxOption = $(multiboxSelector).multibox('buildMultiboxOption', multiboxOptionObject);

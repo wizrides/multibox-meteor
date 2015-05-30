@@ -40,6 +40,31 @@ a.current-selection {
 	border-bottom: 2px solid #FF5C33;
 }
 
+i.material {
+	font-family: 'Material Icons';
+	font-weight: normal;
+	font-style: normal;
+	/* font-size: 24px; */
+	line-height: 1;
+	text-transform: none;
+	display: inline-block;
+	-webkit-font-feature-settings: 'liga';
+	-webkit-font-smoothing: antialiased;
+}
+
+i.green {
+	color: green;
+}
+
+i.red {
+	color: red;
+}
+
+i.dp32x24 {
+	width: 32px;
+	height: 24px;
+}
+
 div.small-margin-top {
 	margin-top: 5px;
 }
@@ -224,15 +249,15 @@ div.small-margin-top {
 	}
 
 	.multibox .multibox-option.ui-selectee.ui-selecting {
-		background-color: #82B1FF;
+		background-color: #99CC99;
 	}
 
 	.multibox .multibox-option.ui-selectee.ui-selected {
-		background-color: #448AFF;
+		background-color: #99CC99;
 	}
 
 	.multibox .multibox-option.ui-selectee.ui-selected:hover {
-		background-color: #3D7CE6;
+		background-color: #80C080;
 	}
 
 	.multibox .multibox-option.ui-selectee.ui-unselecting {
