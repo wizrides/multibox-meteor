@@ -56,6 +56,10 @@ i.green {
 	color: green;
 }
 
+i.material-icons.md-18 { 
+	font-size: 18px; 
+}
+
 i.red {
 	color: red;
 }

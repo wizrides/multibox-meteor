@@ -191,7 +191,7 @@ $.widget("ui.multibox", $.ui.mouse, {
 
 		// Set the starting mouse position to create selection area
 		this.opos = [ event.pageX, event.pageY ];
-		console.log("start x: " + event.pageX + " start y: " + event.pageY);
+		//console.log("start x: " + event.pageX + " start y: " + event.pageY);
 
 		// Cache selected and selectees on start of new selection
 		this.selected = $(options.filter + '.ui-selected', that.element[0]);
@@ -413,14 +413,12 @@ $.widget("ui.multibox", $.ui.mouse, {
 			return;
 		}
 
-		if (this._checkCancelHover(event)) {
-			$(event.target).closest("div.multibox-option").removeClass("ui-selected");
-		}
+		//if (this._checkCancelHover(event)) {
+		//	$(event.target).closest("div.multibox-option").removeClass("ui-selected");
+		//}
 
-		console.log("stop x: " + event.pageX + " stop y: " + event.pageY);
-
-		console.log("delta x: " + (event.pageX - this.opos[0]) + " delta y: " + (event.pageY - this.opos[1]));
-
+		//console.log("stop x: " + event.pageX + " stop y: " + event.pageY);
+		//console.log("delta x: " + (event.pageX - this.opos[0]) + " delta y: " + (event.pageY - this.opos[1]));
 
 		this.selectees.each(function() {
 			var selectee = $.data(this, "multibox-item");
@@ -512,7 +510,7 @@ $.widget("ui.multibox", $.ui.mouse, {
 			return false;
 		}
 
-		if ($(event.target).hasClass("multibox-option-badge")) {
+		if ($(event.target).hasClass("material-icons")) {
 			return true;
 		}
 
@@ -878,18 +876,25 @@ $.widget("ui.multibox", $.ui.mouse, {
         var that = this;
 		return $('<div>').addClass('multibox-option-check-container')
 							.css("display", "none")
-							.append($("<i>").addClass("material-icons dp32x24 green")
+							.append($("<i>").addClass("material-icons md-18 green")
 											.html("check_circle")
-											.bind('click', function () {
+											.on("mouseup", function () {
+												// If selected or selecting and mouse upped on cancel, deselect
+												var oMultiboxOption = $(this).closest("div.multibox-option");
+												if ((oMultiboxOption.hasClass("ui-selected") || oMultiboxOption.hasClass("ui-selecting"))
+													&& this.innerHTML === "cancel") {
+													oMultiboxOption.removeClass("ui-selected").removeClass("ui-selecting");
+													$(this).closest("div.multibox-option-check-container")
+															.css("display", "none");
+													$(this).html("check_circle")
+															.removeClass("red")
+															.addClass("green");
+												}
 		                                    })
 		                                    .hover(function () {
-	                                            $(this).html("cancel")
-	                                            		.removeClass("green")
-	                                            		.addClass("red");
+	                                            $(this).html("cancel").removeClass("green").addClass("red");
 		                                    }, function () {
-	                                            $(this).html("check_circle")
-	                                            		.removeClass("red")
-	                                            		.addClass("green");
+	                                            $(this).html("check_circle").removeClass("red").addClass("green");
 		                                    }));
 	},
 
@@ -903,8 +908,8 @@ $.widget("ui.multibox", $.ui.mouse, {
 
    	buildMultiboxBadge: function (badgeLabel, badgeAction, badgeActionParams) {
    		return $('<div>').addClass('multibox-option-badge-container float-right')
-			   			.append($('<span>').addClass('multibox-option-badge')
-								  	     	.html(badgeLabel)
+			   			.append($('<i>').addClass('material-icons')
+								  	     	.html("info")
 								  		 	.data('badgeLabel', badgeLabel)
 										  	.bind('click', function (event) {
 										  		if ((badgeAction === null) || (badgeAction === undefined)) {
@@ -970,7 +975,7 @@ $.widget("ui.multibox", $.ui.mouse, {
 	centerVerticallyChecks: function () {
 		this.getOptions().each(function () {
 			var oCheck = $(this).find('div.multibox-option-check-container');
-			var oIcon = oCheck.find("i.material");
+			var oIcon = oCheck.find("i.material-icons");
 
 			// Make it visible so that it can center properly
 			oCheck.css("display", "inline-block");
@@ -983,8 +988,10 @@ $.widget("ui.multibox", $.ui.mouse, {
 	centerVerticallyBadges: function () {
 		this.getOptions().each(function () {
 			var oBadge = $(this).find('div.multibox-option-badge-container');
+			var oIcon = oBadge.find("i.material-icons");
 			
 			$.fn.centerVertically(this, oBadge, 'margin', '5', '0');
+			$.fn.centerVertically(oBadge, oIcon, "margin", "0", "0");
 		});
 	}
 
