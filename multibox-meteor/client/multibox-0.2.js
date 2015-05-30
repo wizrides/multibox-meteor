@@ -847,7 +847,7 @@ $.widget("ui.multibox", $.ui.mouse, {
 								   	.resize(function (event) {
 						    			var oBadge = $(this).find('div.multibox-option-badge-container');
 										$.fn.centerVertically(this, oBadge, 'margin', '5', '0');
-								   	});_checkCancelHover
+								   	});
 		    }
 		}
 		else {
