@@ -890,6 +890,8 @@ $.widget("ui.multibox", $.ui.mouse, {
 															.removeClass("red")
 															.addClass("green");
 												}
+
+												that.selectionChanged();
 		                                    })
 		                                    .hover(function () {
 	                                            $(this).html("cancel").removeClass("green").addClass("red");

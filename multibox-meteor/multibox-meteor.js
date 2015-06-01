@@ -41,7 +41,7 @@ function showAlert(message) {
 function rebuild(multiboxSelector) {
   $(multiboxSelector).multibox('clearOptions');
 
-  var count = 50;
+  var count = 100;
   for (var i = 0; i < count; i++) {
     var subOptionLabel = 'Even';
     if (((i + 1) % 2) === 1) {
