@@ -26,6 +26,17 @@ input[type="button"].multibox-control-button.multibox-control-button-selected {
 	background-color: #ADC6EB;
 }
 
+.search-box {
+    margin: 8px auto;
+    padding: 6px;
+    width: 98%;
+
+    border: 1px solid #BDBDBD;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+}
+
 a {
 	color: #5B8CD7;
 	font-size: 14px;
@@ -85,7 +96,7 @@ div.small-margin-top {
 
 .container .container-bottom {
 	position: absolute;
-	top: 220px;
+	top: 250px;
 	bottom: 10px;
 	left: 10px;
 	right: 10px;
@@ -93,7 +104,7 @@ div.small-margin-top {
 
 .container .container-middle {
 	position: absolute;
-	top: 180px;
+	top: 210px;
 	bottom: 10px;
 	left: 10px;
 	right: 10px;

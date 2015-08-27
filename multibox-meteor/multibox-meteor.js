@@ -96,6 +96,23 @@ function rebuildControlPanel(multiboxSelector) {
 }
 
 $(document).ready(function () {
+  var watermark = "Search";
+    $("#search").val(watermark);
+    $("#search").css("color", "#CCC");
+    $("#search").focus(function () {
+        if ($(this).val() === watermark) {
+            $(this).val("");
+            $(this).css("color", "#000");
+        }
+    });
+    $("#search").blur(function () {
+        if ($(this).val() == "") {
+            $(this).val(watermark);
+            $(this).css("color", "#CCC");
+        }
+    });
+
+
   $('#multibox').multibox({
       appendTo: "body",
     autoRefresh: true,
