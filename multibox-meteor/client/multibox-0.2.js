@@ -1,7 +1,7 @@
 (function ($) {
 	
 	/*
-    * Example: $.fn.centerVertically(containerElement, element, 'margin', '10', '0');
+    * Example: $.fn.centerVertically(containerElement, element, "margin", "10", "0");
     */
     
     /*
@@ -18,14 +18,14 @@
 	$.fn.centerVertically = function (containerElement, element, cssProperty, cssPropertyValueRight, cssPropertyValueLeft) {
 		var dVerticalSpacing = ($(containerElement).height() - $(element).height()) / 2.0;
 
-		var strVerticalSpacingPixelValue = dVerticalSpacing + 'px';
-		var strHorizontalSpacingPixelValueRight = cssPropertyValueRight + 'px';
-		var strHorizontalSpacingPixelValueLeft = cssPropertyValueLeft + 'px';
+		var strVerticalSpacingPixelValue = dVerticalSpacing + "px";
+		var strHorizontalSpacingPixelValueRight = cssPropertyValueRight + "px";
+		var strHorizontalSpacingPixelValueLeft = cssPropertyValueLeft + "px";
 
-		var strCssPropertyTop = cssProperty + '-top';
-		var strCssPropertyBottom = cssProperty + '-bottom';
-		var strCssPropertyRight = cssProperty + '-right';
-		var strCssPropertyLeft = cssProperty + '-left';
+		var strCssPropertyTop = cssProperty + "-top";
+		var strCssPropertyBottom = cssProperty + "-bottom";
+		var strCssPropertyRight = cssProperty + "-right";
+		var strCssPropertyLeft = cssProperty + "-left";
 
 		$(element).css(strCssPropertyTop, strVerticalSpacingPixelValue);
 		$(element).css(strCssPropertyBottom, strVerticalSpacingPixelValue);
@@ -66,7 +66,7 @@ $.widget("ui.multibox", $.ui.mouse, {
 		// "single" or "multiple"
 		selectionMode: "multiple",
 
-		// 'all' or 'selected'
+		// "all" or "selected"
         displayFilter: "all",
 
 		// Callbacks
@@ -89,7 +89,7 @@ $.widget("ui.multibox", $.ui.mouse, {
 
 		// Cache selectee children based on filter
 		this.refresh = function() {
-			selected = $(that.options.filter + '.ui-selected', that.element[0]);
+			selected = $(that.options.filter + ".ui-selected", that.element[0]);
 
 			selectees = $(that.options.filter, that.element[0]);
 			selectees.addClass("ui-selectee");
@@ -137,7 +137,7 @@ $.widget("ui.multibox", $.ui.mouse, {
 
 		/*
 		// Handle mousewheel scroll
-		this.element.unbind().bind('mousewheel DOMMouseScroll', function (event) {
+		this.element.unbind().bind("mousewheel DOMMouseScroll", function (event) {
 			if ((event.originalEvent.wheelDelta > 0) || (event.originalEvent.detail < 0)) {
 		        console.log("up " + event.originalEvent.wheelDelta);
 
@@ -159,7 +159,7 @@ $.widget("ui.multibox", $.ui.mouse, {
 		this._mouseInit();
 
 		if (this.options.showSelectionHelper) {
-			this.helper = $("<div class='ui-multibox-helper'></div>");
+			this.helper = $("<div class=\"ui-multibox-helper\"></div>");
 		}
 	},
 
@@ -184,7 +184,7 @@ $.widget("ui.multibox", $.ui.mouse, {
 			return;
 		}
 
-		// Don't select when badge is clicked
+		// Don"t select when badge is clicked
 		if (this._checkBadgeClicked(event)) {
 			return;
 		}
@@ -194,7 +194,7 @@ $.widget("ui.multibox", $.ui.mouse, {
 		//console.log("start x: " + event.pageX + " start y: " + event.pageY);
 
 		// Cache selected and selectees on start of new selection
-		this.selected = $(options.filter + '.ui-selected', that.element[0]);
+		this.selected = $(options.filter + ".ui-selected", that.element[0]);
 		this.selectees = $(options.filter, this.element[0]);
 
 		this._trigger("start", event);
@@ -216,11 +216,11 @@ $.widget("ui.multibox", $.ui.mouse, {
 
 		// Find the parent multibox option
 		// event.target - the html element that caused the mouse start event (mouse down)
-		var oSelectedOption = $(event.target).closest('div.multibox-option');
-		var oSelectedOptionValue = oSelectedOption.attr('value');
+		var oSelectedOption = $(event.target).closest("div.multibox-option");
+		var oSelectedOptionValue = oSelectedOption.attr("value");
 
 		// If selection mode is single, unselect selected options
-		if (this.options.selectionMode === 'single') {
+		if (this.options.selectionMode === "single") {
 			this.selected.each(function() {
 				var bIsTarget = false;
 				var selectee = $.data(this, "multibox-item");
@@ -228,15 +228,15 @@ $.widget("ui.multibox", $.ui.mouse, {
 				// Sets the selectee as selected at the start of selection
 				selectee.startselected = true;
 
-				var oSelecteeValue = $(this).attr('value');
+				var oSelecteeValue = $(this).attr("value");
 				
-				// Don't unselect itself in single selection mode
+				// Don"t unselect itself in single selection mode
 				if (oSelecteeValue === oSelectedOptionValue) {
 					bIsTarget = true;
 					selectee.isStartElement = true;
 				}
 
-				// If found selected that isn't the target, unselect
+				// If found selected that isn"t the target, unselect
 				if (!bIsTarget) {
 					that._setUnselecting(event, selectee);
 				}
@@ -253,7 +253,7 @@ $.widget("ui.multibox", $.ui.mouse, {
 
 		// Find parents in case of nested multibox-option items, up to the parent multibox
 		// Include selected option (event.target) with addBack
-		oSelectedOption.parentsUntil('div.multibox.ui-multibox').addBack().each(function() {
+		oSelectedOption.parentsUntil("div.multibox.ui-multibox").addBack().each(function() {
 			var bDoSelect,
 				selectee = $.data(this, "multibox-item");
 			
@@ -262,8 +262,8 @@ $.widget("ui.multibox", $.ui.mouse, {
 				// Set as the start selection element
 				selectee.isStartElement = true;
 				
-				// Don't allow click to toggle on single selection mode
-				//bDoSelect = (that.options.selectionMode === 'single') || !selectee.$element.hasClass("ui-selected");
+				// Don"t allow click to toggle on single selection mode
+				//bDoSelect = (that.options.selectionMode === "single") || !selectee.$element.hasClass("ui-selected");
 
 				// Allow click to toggle
 				bDoSelect = !selectee.$element.hasClass("ui-selected");
@@ -313,7 +313,7 @@ $.widget("ui.multibox", $.ui.mouse, {
 		}
 
 		// Update the opos on drag to prevent multiple selection for single selection mode
-		// Only a single multibox-option will be 'hit'
+		// Only a single multibox-option will be "hit"
 		if (this.options.selectionMode === "single") {
 			this.opos = [ event.pageX, event.pageY ];
 		}
@@ -385,7 +385,7 @@ $.widget("ui.multibox", $.ui.mouse, {
 							selectee.selected = true;
 						}
 						else {
-							// Unselecting if the selectee wasn't selected at the start of new selection
+							// Unselecting if the selectee wasn"t selected at the start of new selection
 							that._setUnselecting(event, selectee);
 						}
 					}
@@ -449,7 +449,7 @@ $.widget("ui.multibox", $.ui.mouse, {
 	},
 
 	_setSelecting: function (event, selectee) {
-		selectee.$element.removeClass('ui-unselecting').addClass("ui-selecting");
+		selectee.$element.removeClass("ui-unselecting").addClass("ui-selecting");
 		selectee.selecting = true;
 		selectee.unselecting = false;
 		
@@ -530,22 +530,22 @@ $.widget("ui.multibox", $.ui.mouse, {
 		var bDidSelectionChange = false;
 
 		// Get current selection
-		var lstNewSelection = $(this.options.filter + '.ui-selected', this.element[0]);
+		var lstNewSelection = $(this.options.filter + ".ui-selected", this.element[0]);
 
-		// If number of selected items doesn't match, selection changed
+		// If number of selected items doesn"t match, selection changed
 		if (this.selected.length !== lstNewSelection.length) {
 			bDidSelectionChange = true;
 		}
 		else {
 			// Compare selected items
 			this.selected.each(function () {
-				// If previous selected value doesn't exist in new selection, selection changed
-				var oValueToFind = $(this).attr('value');
+				// If previous selected value doesn"t exist in new selection, selection changed
+				var oValueToFind = $(this).attr("value");
 				var bFound = false;
 
 				// Compare to the new selection
 				lstNewSelection.each(function () {
-					var oValue = $(this).attr('value');
+					var oValue = $(this).attr("value");
 					if (oValueToFind === oValue) {
 						bFound = true;
 
@@ -572,43 +572,43 @@ $.widget("ui.multibox", $.ui.mouse, {
 		// Handle checkbox display
         var options = this.getOptions();
         for (var i = 0; i < options.length; i++) {
-            if ($(options[i]).hasClass('ui-selected')) {
-                $(options[i]).find('div.multibox-option-check-container').each(function () {
-                    //$(this).find('input[type="checkbox"]').prop('checked', true);
-                    $(this).css('display', 'inline-block');
+            if ($(options[i]).hasClass("ui-selected")) {
+                $(options[i]).find("div.multibox-option-check-container").each(function () {
+                    //$(this).find("input[type="checkbox"]").prop("checked", true);
+                    $(this).css("display", "inline-block");
                 });
             }
             else {
-                $(options[i]).find('div.multibox-option-check-container').each(function () {
+                $(options[i]).find("div.multibox-option-check-container").each(function () {
                     $(this).css("display", "none");
-                    //$(this).find('input[type="checkbox"]').prop('checked', false);
+                    //$(this).find("input[type="checkbox"]").prop("checked", false);
                 });
             }
         }
 
         // Handle display filter setting
-        if (this.options.displayFilter === 'selected') {
+        if (this.options.displayFilter === "selected") {
             this.getOptions().each(function () {
             	//if (that.selectionMode !=== "single") {
-	                if (!$(this).hasClass('ui-selected')) {
-	                    $(this).slideUp('fast');
+	                if (!$(this).hasClass("ui-selected")) {
+	                    $(this).slideUp("fast");
 	                }
 	                else {
-	                    $(this).slideDown('fast');
+	                    $(this).slideDown("fast");
 	                }
             	//}
             });
         }
 
-        this._trigger('change', event);
+        this._trigger("change", event);
 	},
 
 	getOptions: function () {
-		return this.element.find('div.multibox-option');
+		return this.element.find("div.multibox-option");
 	},
 
 	getSelected: function () {
-		return this.element.find('div.multibox-option.ui-selected');
+		return this.element.find("div.multibox-option.ui-selected");
 	},
 
 	getValues: function (multiboxOptions) {
@@ -619,7 +619,7 @@ $.widget("ui.multibox", $.ui.mouse, {
 		}
 
 		for (var i = 0; i < multiboxOptions.length; i++) {
-			values[i] = $(multiboxOptions[i]).attr('value');
+			values[i] = $(multiboxOptions[i]).attr("value");
 		}
 
 		return values;
@@ -635,7 +635,7 @@ $.widget("ui.multibox", $.ui.mouse, {
 
 	getSelectedControl: function () {
 		var control;
-		this.element.find('div.multibox-option.multibox-control.multibox-control-selected').each(function () {
+		this.element.find("div.multibox-option.multibox-control.multibox-control-selected").each(function () {
 			if ((this !== null) && (this !== undefined)) {
 				control = this;
 			}
@@ -644,7 +644,7 @@ $.widget("ui.multibox", $.ui.mouse, {
 	},
 
 	getSelectecControlValue: function () {
-		return this.getSelectedControl().attr('value');
+		return this.getSelectedControl().attr("value");
 	},
 
 	containsOption: function (multiboxOption) {
@@ -654,7 +654,7 @@ $.widget("ui.multibox", $.ui.mouse, {
 			return false;
 		}
 
-		if ($.inArray($(multiboxOption).attr('value'), values) > -1) {
+		if ($.inArray($(multiboxOption).attr("value"), values) > -1) {
 			return true;
 		}
 
@@ -662,29 +662,29 @@ $.widget("ui.multibox", $.ui.mouse, {
 	},
 
 	showAll: function () {
-        this.options.displayFilter = 'all';
+        this.options.displayFilter = "all";
 
-		this.element.find('div.multibox-option').slideDown('fast');
+		this.element.find("div.multibox-option").slideDown("fast");
 	},
 
 	showSelected: function () {
-        this.options.displayFilter = 'selected';
+        this.options.displayFilter = "selected";
 
-		this.element.find('div.multibox-option').css("display", "none");
-		this.element.find('div.multibox-option.ui-selected').slideDown('fast');
+		this.element.find("div.multibox-option").css("display", "none");
+		this.element.find("div.multibox-option.ui-selected").slideDown("fast");
 	},
 
 	selectAll: function () {
-		this.element.find('div.multibox-option').each(function () {
-            if (!$(this).hasClass('ui-selected')) {
-                $(this).addClass('ui-selected');
+		this.element.find("div.multibox-option").each(function () {
+            if (!$(this).hasClass("ui-selected")) {
+                $(this).addClass("ui-selected");
             }
         });
         this.selectionChanged();
 	},
 
 	clearSelection: function() {
-		this.element.find('div.multibox-option').removeClass('ui-selected');
+		this.element.find("div.multibox-option").removeClass("ui-selected");
 		this.selectionChanged();
 	},
 
@@ -694,7 +694,7 @@ $.widget("ui.multibox", $.ui.mouse, {
 			bSelectionChanged = true;
 		}
 
-		this.element.find('div.multibox-option').remove();
+		this.element.find("div.multibox-option").remove();
 
 		if (bSelectionChanged) {
 			this.selectionChanged();
@@ -716,10 +716,10 @@ $.widget("ui.multibox", $.ui.mouse, {
 	},
 
 	selectGroup: function (group) {
-		this.element.find('div.multibox-option').removeClass('ui-selected');
-		this.element.find('div.multibox-option').each(function () {
-			if ($.inArray(group, $(this).data('group')) > -1) {
-				$(this).addClass('ui-selected');
+		this.element.find("div.multibox-option").removeClass("ui-selected");
+		this.element.find("div.multibox-option").each(function () {
+			if ($.inArray(group, $(this).data("group")) > -1) {
+				$(this).addClass("ui-selected");
 			}
 		});
 
@@ -746,33 +746,33 @@ $.widget("ui.multibox", $.ui.mouse, {
 
 	enableHover: function () {
 		this.element.hover(function (event) {
-			$(this).css('cursor', 'pointer');
-			$(this).find('*').css('cursor', 'pointer');
+			$(this).css("cursor", "pointer");
+			$(this).find("*").css("cursor", "pointer");
 		}, function (event) {
-			$(this).css('cursor', 'default');
-			$(this).find('*').css('cursor', 'default');
+			$(this).css("cursor", "default");
+			$(this).find("*").css("cursor", "default");
 		});
 	},
 
 	disableHover: function () {
 		this.element.hover(function (event) {
-			$(this).css('cursor', 'default');
-			$(this).find('*').css('cursor', 'default');
+			$(this).css("cursor", "default");
+			$(this).find("*").css("cursor", "default");
 		}, function (event) {
-			$(this).css('cursor', 'default');
-			$(this).find('*').css('cursor', 'default');
+			$(this).css("cursor", "default");
+			$(this).find("*").css("cursor", "default");
 		});
 	},
 
 	enableSelection: function () {
         this.options.allowSelection = true;
-        this.element.find('div.multibox-option').addClass('ui-selectee');
+        this.element.find("div.multibox-option").addClass("ui-selectee");
         this.enableHover();
     },
 
     disableSelection: function () {
         this.options.allowSelection = false;
-        this.element.find('div.multibox-option').removeClass('ui-selectee');
+        this.element.find("div.multibox-option").removeClass("ui-selectee");
         this.disableHover();
     },
 
@@ -783,31 +783,31 @@ $.widget("ui.multibox", $.ui.mouse, {
 	buildMultiboxControl: function (multiboxControl) {
 		var multiboxControlButton = {
 			value: multiboxControl.buttonValue,
-			onClick: '',
-			dataKey: '',
-			data: ''
+			onClick: "",
+			dataKey: "",
+			data: ""
 		};
 
-		return $('<div>').attr('value', multiboxControl.value)
-						   	.addClass('multibox-option multibox-control')
-						   	.data('', '')
+		return $("<div>").attr("value", multiboxControl.value)
+						   	.addClass("multibox-option multibox-control")
+						   	.data("", "")
 						   	.append(this.buildMultiboxControlButton(multiboxControlButton));
 	},
 
 	buildMultiboxControlButton: function (multiboxControlButton) {
 		var that = this;
-		return $('<div>').addClass('multibox-option-control-button-container')
-							.append($('<a>').attr('id', multiboxControlButton.value)
-												.addClass('multibox-control-button')
+		return $("<div>").addClass("multibox-option-control-button-container")
+							.append($("<a>").attr("id", multiboxControlButton.value)
+												.addClass("multibox-control-button")
 												.html(multiboxControlButton.value)
 												.data(multiboxControlButton.dataKey, multiboxControlButton.data)
-												.bind('click', function () {
-													$(this).closest('div.multibox-option.multibox-control')
-															.addClass('multibox-control-selected');
+												.bind("click", function () {
+													$(this).closest("div.multibox-option.multibox-control")
+															.addClass("multibox-control-selected");
 
 													// that = multibox
-													that.element.find('div.multibox-option.multibox-control').each(function () {
-														$(this).removeClass('multibox-control-selected');
+													that.element.find("div.multibox-option.multibox-control").each(function () {
+														$(this).removeClass("multibox-control-selected");
 													});
 												}));
 	},
@@ -820,61 +820,61 @@ $.widget("ui.multibox", $.ui.mouse, {
 
 		if (multiboxOption.showBadge) {
 			if (multiboxOption.showCheck) {
-				return $('<div>').attr('value', multiboxOption.value)
-							   		.addClass('multibox-option border-bottom')
-							   		.addClass('ui-selectee')
-								   	.data('group', multiboxOption.groups)
+				return $("<div>").attr("value", multiboxOption.value)
+							   		.addClass("multibox-option border-bottom")
+							   		.addClass("ui-selectee")
+								   	.data("group", multiboxOption.groups)
 								   	.append(this.buildMultiboxCheck())
 								   	.append(this.buildMultiboxLabel(multiboxLabel))
 								   	.append(this.buildMultiboxBadge(multiboxOption.badgeLabel, multiboxOption.badgeAction, multiboxOption.badgeActionParams))
 								   	.resize(function (event) {
-						    			var oCheck = $(this).find('div.multibox-option-check-container');
-										$.fn.centerVertically(this, oCheck, 'margin', '10', '0');
+						    			var oCheck = $(this).find("div.multibox-option-check-container");
+										$.fn.centerVertically(this, oCheck, "margin", "10", "0");
 
-						    			var oBadge = $(this).find('div.multibox-option-badge-container');
-										$.fn.centerVertically(this, oBadge, 'margin', '5', '0');
+						    			var oBadge = $(this).find("div.multibox-option-badge-container");
+										$.fn.centerVertically(this, oBadge, "margin", "5", "0");
 								   	});
 		    }
 		    else {
-		    	return $('<div>').attr('value', multiboxOption.value)
-							   		.addClass('multibox-option border-bottom')
-							   		.addClass('ui-selectee')
-								   	.data('group', multiboxOption.groups)
+		    	return $("<div>").attr("value", multiboxOption.value)
+							   		.addClass("multibox-option border-bottom")
+							   		.addClass("ui-selectee")
+								   	.data("group", multiboxOption.groups)
 								   	.append(this.buildMultiboxLabel(multiboxLabel))
 								   	.append(this.buildMultiboxBadge(multiboxOption.badgeLabel))
 								   	.resize(function (event) {
-						    			var oBadge = $(this).find('div.multibox-option-badge-container');
-										$.fn.centerVertically(this, oBadge, 'margin', '5', '0');
+						    			var oBadge = $(this).find("div.multibox-option-badge-container");
+										$.fn.centerVertically(this, oBadge, "margin", "5", "0");
 								   	});
 		    }
 		}
 		else {
 			if (multiboxOption.showCheck) {
-				return $('<div>').attr('value', multiboxOption.value)
-							   		.addClass('multibox-option border-bottom')
-							   		.addClass('ui-selectee')
-								   	.data('group', multiboxOption.groups)
+				return $("<div>").attr("value", multiboxOption.value)
+							   		.addClass("multibox-option border-bottom")
+							   		.addClass("ui-selectee")
+								   	.data("group", multiboxOption.groups)
 								   	.append(this.buildMultiboxCheck())
 								   	.append(this.buildMultiboxLabel(multiboxLabel))
 								   	.resize(function (event) {
-						    			var oCheck = $(this).find('div.multibox-option-check-container');
-										$.fn.centerVertically(this, oCheck, 'margin', '10', '0');
+						    			var oCheck = $(this).find("div.multibox-option-check-container");
+										$.fn.centerVertically(this, oCheck, "margin", "10", "0");
 								   	});
 		    }
 		    else {
-		    	return $('<div>').attr('value', multiboxOption.value)
-							   		.addClass('multibox-option border-bottom')
-							   		.addClass('ui-selectee')
-								   	.data('group', multiboxOption.groups)
+		    	return $("<div>").attr("value", multiboxOption.value)
+							   		.addClass("multibox-option border-bottom")
+							   		.addClass("ui-selectee")
+								   	.data("group", multiboxOption.groups)
 								   	.append(this.buildMultiboxLabel(multiboxLabel));
 		    }
 		}
 	},
 
 	buildMultiboxCheck: function () {
-		// Save multibox reference 'this' so we can access within click event
+		// Save multibox reference "this" so we can access within click event
         var that = this;
-		return $('<div>').addClass('multibox-option-check-container')
+		return $("<div>").addClass("multibox-option-check-container")
 							.css("display", "none")
 							.append($("<i>").addClass("material-icons md-18 green")
 											.html("check_circle")
@@ -901,19 +901,19 @@ $.widget("ui.multibox", $.ui.mouse, {
 	},
 
 	buildMultiboxLabel: function (multiboxLabel) {
-		return $('<div>').addClass('multibox-option-label-container')
-					   		.append($('<label>').addClass('multibox-option-main-label')
+		return $("<div>").addClass("multibox-option-label-container")
+					   		.append($("<label>").addClass("multibox-option-main-label")
 										   		.text(multiboxLabel.mainLabel))
-					   		.append($('<label>').addClass('multibox-option-sub-label')
+					   		.append($("<label>").addClass("multibox-option-sub-label")
 											   	.text(multiboxLabel.subLabel));
    	},
 
    	buildMultiboxBadge: function (badgeLabel, badgeAction, badgeActionParams) {
-   		return $('<div>').addClass('multibox-option-badge-container float-right')
-			   			.append($('<i>').addClass('material-icons')
+   		return $("<div>").addClass("multibox-option-badge-container float-right")
+			   			.append($("<i>").addClass("material-icons")
 								  	     	.html("info")
-								  		 	.data('badgeLabel', badgeLabel)
-										  	.bind('click', function (event) {
+								  		 	.data("badgeLabel", badgeLabel)
+										  	.bind("click", function (event) {
 										  		if ((badgeAction === null) || (badgeAction === undefined)) {
 										  			return;
 										  		}
@@ -927,7 +927,7 @@ $.widget("ui.multibox", $.ui.mouse, {
 
 	search: function (token) {
 		if ((token === null) || (token === undefined) || (token.length === 0)) {
-            if (this.options.displayFilter === 'selected') {
+            if (this.options.displayFilter === "selected") {
                 this.showSelected();
             }
             else {
@@ -937,7 +937,7 @@ $.widget("ui.multibox", $.ui.mouse, {
             return;
         }
 
-        this.element.find('div.multibox-option').css("display", "none");
+        this.element.find("div.multibox-option").css("display", "none");
         var token = token.trim().toLowerCase();
 
         // Blank search token
@@ -947,7 +947,7 @@ $.widget("ui.multibox", $.ui.mouse, {
 
         // Search options based on current display filter
         var options = [];
-        if (this.options.displayFilter === 'selected') {
+        if (this.options.displayFilter === "selected") {
             options = this.getSelected();
         }
         else {
@@ -956,11 +956,15 @@ $.widget("ui.multibox", $.ui.mouse, {
 
         // Find token within options and display
         options.each(function () {
-            if (($(this).data('group')[0].toLowerCase().indexOf(token) > -1)
-                || ($(this).find('label.multibox-option-main-label').text().toLowerCase().indexOf(token) > -1)
-                || ($(this).find('label.multibox-option-sub-label').text().toLowerCase().indexOf(token) > -1)) {
+        	var oGroupValue = $(this).data("group")[0];
+        	var oMainLabel = $(this).find("label.multibox-option-main-label");
+        	var oSubLabel = $(this).find("label.multibox-option-sub-label");
 
-                $(this).slideDown('fast');
+            if ((oGroupValue.toString().toLowerCase().indexOf(token) > -1)
+                || (oMainLabel.text().toLowerCase().indexOf(token) > -1)
+                || (oSubLabel.text().toLowerCase().indexOf(token) > -1)) {
+
+                $(this).slideDown("fast");
             }
         });
 	},
@@ -968,31 +972,31 @@ $.widget("ui.multibox", $.ui.mouse, {
 	initChecks: function () {
 		this.centerVerticallyChecks();
 		this.getOptions().each(function () {
-			if (!$(this).hasClass('ui-selected')) {
-	            $(this).find('div.multibox-option-check-container').css("display", "none");
+			if (!$(this).hasClass("ui-selected")) {
+	            $(this).find("div.multibox-option-check-container").css("display", "none");
 	        }
 		});
 	},
 
 	centerVerticallyChecks: function () {
 		this.getOptions().each(function () {
-			var oCheck = $(this).find('div.multibox-option-check-container');
+			var oCheck = $(this).find("div.multibox-option-check-container");
 			var oIcon = oCheck.find("i.material-icons");
 
 			// Make it visible so that it can center properly
 			oCheck.css("display", "inline-block");
 
-			$.fn.centerVertically(this, oCheck, 'margin', '10', '0');
+			$.fn.centerVertically(this, oCheck, "margin", "10", "0");
 			$.fn.centerVertically(oCheck, oIcon, "margin", "0", "0");
 		});
 	},
 
 	centerVerticallyBadges: function () {
 		this.getOptions().each(function () {
-			var oBadge = $(this).find('div.multibox-option-badge-container');
+			var oBadge = $(this).find("div.multibox-option-badge-container");
 			var oIcon = oBadge.find("i.material-icons");
 			
-			$.fn.centerVertically(this, oBadge, 'margin', '5', '0');
+			$.fn.centerVertically(this, oBadge, "margin", "5", "0");
 			$.fn.centerVertically(oBadge, oIcon, "margin", "0", "0");
 		});
 	}
