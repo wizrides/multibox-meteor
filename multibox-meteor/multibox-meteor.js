@@ -25,7 +25,7 @@ if (Meteor.isServer) {
             MultiboxOptions.remove({ _id: option._id });
         });
 
-        for (var i = 0; i < 1000; i++) {
+        for (var i = 0; i < 100; i++) {
             var strSubLabel = "even";
             if (i % 2 === 1) {
                 strSubLabel = "odd";
