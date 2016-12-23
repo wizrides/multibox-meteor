@@ -1,9 +1,9 @@
 (function ($) {
-	
+
 	/*
     * Example: $.fn.centerVertically(containerElement, element, "margin", "10", "0");
     */
-    
+
     /*
     * For use when centering a child element within a container element using CSS margins
     *
@@ -47,7 +47,7 @@ $.widget("ui.multibox", $.ui.mouse, {
 
 		// Refresh selectees on each selection
 		autoRefresh: true,
-		
+
 		// Required for ui.mouse
 		distance: 0,
 
@@ -105,10 +105,10 @@ $.widget("ui.multibox", $.ui.mouse, {
 					top: pos.top,
 					right: pos.left + $this.outerWidth(),
 					bottom: pos.top + $this.outerHeight(),
-					
+
 					startselected: false,
 					isStartElement: false,
-					
+
 					selected: $this.hasClass("ui-selected"),
 					selecting: $this.hasClass("ui-selecting"),
 					unselecting: $this.hasClass("ui-unselecting")
@@ -126,7 +126,7 @@ $.widget("ui.multibox", $.ui.mouse, {
 			var delta = currentScrollTop - that.oScrollTop;
 
 			that.oScrollTop = currentScrollTop;
-			
+
 			console.log(that.mousePositionX);
 			that.mousePositionX = that.mousePositionX + delta;
 			console.log(that.mousePositionX);
@@ -143,15 +143,15 @@ $.widget("ui.multibox", $.ui.mouse, {
 
 		        //event.pageX = event.pageX + event.originalEvent.wheelDelta;
 		        //event.pageY = event.pageY + event.originalEvent.wheelDelta;
-		        
+
 		        //that._mouseDrag(event);
 		    }
 		    else {
-		        console.log("down " + event.originalEvent.wheelDelta);	
+		        console.log("down " + event.originalEvent.wheelDelta);
 		    }
 		});
 		*/
-		
+
 
 		this.selected = selected;
 		this.selectees = selectees.addClass("ui-selectee");
@@ -229,7 +229,7 @@ $.widget("ui.multibox", $.ui.mouse, {
 				selectee.startselected = true;
 
 				var oSelecteeValue = $(this).attr("value");
-				
+
 				// Don"t unselect itself in single selection mode
 				if (oSelecteeValue === oSelectedOptionValue) {
 					bIsTarget = true;
@@ -256,12 +256,12 @@ $.widget("ui.multibox", $.ui.mouse, {
 		oSelectedOption.parentsUntil("div.multibox.ui-multibox").addBack().each(function() {
 			var bDoSelect,
 				selectee = $.data(this, "multibox-item");
-			
+
 			// If a multibox-item
 			if (selectee) {
 				// Set as the start selection element
 				selectee.isStartElement = true;
-				
+
 				// Don"t allow click to toggle on single selection mode
 				//bDoSelect = (that.options.selectionMode === "single") || !selectee.$element.hasClass("ui-selected");
 
@@ -276,7 +276,7 @@ $.widget("ui.multibox", $.ui.mouse, {
 				selectee.unselecting = !bDoSelect;
 				selectee.selecting = bDoSelect;
 				selectee.selected = bDoSelect;
-				
+
 				if (bDoSelect) {
 					that._trigger("selecting", event, {
 						selecting: selectee.element
@@ -452,7 +452,7 @@ $.widget("ui.multibox", $.ui.mouse, {
 		selectee.$element.removeClass("ui-unselecting").addClass("ui-selecting");
 		selectee.selecting = true;
 		selectee.unselecting = false;
-		
+
 		this._trigger("selecting", event, {
 			selecting: selectee.element
 		});
@@ -475,7 +475,7 @@ $.widget("ui.multibox", $.ui.mouse, {
 		selectee.selecting = false;
 		selectee.$element.addClass("ui-unselecting");
 		selectee.unselecting = true;
-		
+
 		this._trigger("unselecting", event, {
 			unselecting: selectee.element
 		});
@@ -497,7 +497,7 @@ $.widget("ui.multibox", $.ui.mouse, {
 			return false;
 		}
 
-		if ($(event.target).hasClass("material-icons") 
+		if ($(event.target).hasClass("material-icons")
 			&& $(event.target).innerHTML === "cancel") {
 			return true;
 		}
@@ -922,7 +922,7 @@ $.widget("ui.multibox", $.ui.mouse, {
 										  	})
 										  	.hover(function (event) {
 								  		 	}, function (event) {
-							  		 		}));	
+							  		 		}));
 	},
 
 	search: function (token) {
@@ -995,7 +995,7 @@ $.widget("ui.multibox", $.ui.mouse, {
 		this.getOptions().each(function () {
 			var oBadge = $(this).find("div.multibox-option-badge-container");
 			var oIcon = oBadge.find("i.material-icons");
-			
+
 			$.fn.centerVertically(this, oBadge, "margin", "5", "0");
 			$.fn.centerVertically(oBadge, oIcon, "margin", "0", "0");
 		});

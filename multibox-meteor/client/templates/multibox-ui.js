@@ -1,5 +1,4 @@
 MultiboxPlayground = {
-
     Ready: function () {
         var that = this;
 
@@ -17,6 +16,8 @@ MultiboxPlayground = {
 
         //that.Rebuild("#multibox");
         //that.RebuildControlPanel("#multibox-control-panel")
+
+        $("#multibox").multibox("enableHover");
     },
 
     ApplySearch: function () {

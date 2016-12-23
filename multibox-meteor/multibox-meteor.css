@@ -107,7 +107,7 @@ div.small-margin-top {
 
 .container .container-bottom {
 	position: absolute;
-	top: 250px;
+	top: 350px;
 	bottom: 10px;
 	left: 10px;
 	right: 10px;
@@ -115,7 +115,7 @@ div.small-margin-top {
 
 .container .container-middle {
 	position: absolute;
-	top: 210px;
+	top: 310px;
 	bottom: 10px;
 	left: 10px;
 	right: 10px;

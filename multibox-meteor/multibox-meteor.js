@@ -1,6 +1,3 @@
-MultiboxOptions = new Mongo.Collection("MultiboxOptions");
-
-// Code to run on client
 if (Meteor.isClient) {
     Template.multibox.helpers({
     	multiboxOptions: function () {
@@ -8,12 +5,34 @@ if (Meteor.isClient) {
     	}
     });
 
+    Template.multiboxOptionCreate.onRendered(function () {
+        MultiboxOptionCreateInterface.Build();
+    });
+
+    Template.multiboxOptionCreate.events({
+        "submit .multibox-option-create-form": function (event) {
+            event.preventDefault();
+
+            var number = parseInt(event.target.number.value);
+            var mainLabel = event.target.mainLabel.value;
+            var subLabel = event.target.subLabel.value;
+
+            var oOption = MultiboxOptionCreateInterface.Add(number, mainLabel, subLabel);
+
+            MultiboxOptions.insert(oOption);
+
+            event.target.number.value = null;
+            event.target.mainLabel.value = "";
+            event.target.subLabel.value = "";
+        }
+    });
+
     Template.multibox.onRendered(function () {
         MultiboxPlayground.Ready();
     });
 
     Template.multiboxOption.onRendered(function () {
-    	MultiboxOptionInterface.build(this);
+    	MultiboxOptionInterface.Build(this);
     });
 }
 
@@ -25,7 +44,7 @@ if (Meteor.isServer) {
             MultiboxOptions.remove({ _id: option._id });
         });
 
-        for (var i = 0; i < 100; i++) {
+        for (var i = 0; i < 3; i++) {
             var strSubLabel = "even";
             if (i % 2 === 1) {
                 strSubLabel = "odd";
@@ -38,7 +57,6 @@ if (Meteor.isServer) {
                 mainLabel: "Main Label " + i,
                 subLabel: "" + strSubLabel + " " + i,
                 showBadge: true,
-                badgeLabel: i,
                 showCheck: true,
                 badgeLabel: i,
                 badgeAction: function (count) { alert(count); },
